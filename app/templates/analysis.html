@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}Patient Information & Symptom Intake | MedNova AI{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Patient Symptom & Clinical Intake</h1>
+    <p class="page-sub">Enter synthetic or de-identified clinical observations for AI-assisted differential evaluation</p>
+  </div>
+</div>
+
+<div class="form-container">
+  <div class="card">
+    <div class="card-body">
+      <form method="POST" id="analysisForm" novalidate>
+        {{ form.hidden_tag() }}
+
+        <div class="form-row">
+          <div class="form-group col-half">
+            {{ form.age.label(class="form-label") }}
+            {{ form.age(class="form-control" + (" is-invalid" if form.age.errors else ""), placeholder="e.g. 34") }}
+            <small class="form-hint">{{ form.age.description }}</small>
+            {% for error in form.age.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="form-group col-half">
+            {{ form.gender.label(class="form-label") }}
+            {{ form.gender(class="form-select" + (" is-invalid" if form.gender.errors else "")) }}
+            {% for error in form.gender.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="form-group">
+          {{ form.duration.label(class="form-label") }}
+          {{ form.duration(class="form-control" + (" is-invalid" if form.duration.errors else ""), placeholder="e.g. 18 months, progressive onset") }}
+          <small class="form-hint">{{ form.duration.description }}</small>
+          {% for error in form.duration.errors %}
+            <div class="invalid-feedback">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="form-group">
+          {{ form.symptoms.label(class="form-label") }}
+          {{ form.symptoms(class="form-textarea" + (" is-invalid" if form.symptoms.errors else ""), rows=5, placeholder="Detail physical symptoms, unusual pain patterns, neurological cues, joint mobility, skin changes...") }}
+          <small class="form-hint">{{ form.symptoms.description }}</small>
+          {% for error in form.symptoms.errors %}
+            <div class="invalid-feedback">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="form-group">
+          {{ form.medical_history.label(class="form-label") }}
+          {{ form.medical_history(class="form-textarea" + (" is-invalid" if form.medical_history.errors else ""), rows=3, placeholder="Prior medical events, chronic illnesses, unconfirmed previous differentials...") }}
+          <small class="form-hint">{{ form.medical_history.description }}</small>
+          {% for error in form.medical_history.errors %}
+            <div class="invalid-feedback">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-half">
+            {{ form.family_history.label(class="form-label") }}
+            {{ form.family_history(class="form-textarea" + (" is-invalid" if form.family_history.errors else ""), rows=3, placeholder="Consanguinity, unexplained early familial deaths, inherited disorders...") }}
+            <small class="form-hint">{{ form.family_history.description }}</small>
+            {% for error in form.family_history.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="form-group col-half">
+            {{ form.lab_findings.label(class="form-label") }}
+            {{ form.lab_findings(class="form-textarea" + (" is-invalid" if form.lab_findings.errors else ""), rows=3, placeholder="Serum chemistry, abnormal enzymes, ANA titers, biopsy notes, genetic tests...") }}
+            <small class="form-hint">{{ form.lab_findings.description }}</small>
+            {% for error in form.lab_findings.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Ethical Consent Checkbox -->
+        <div class="form-consent-box">
+          <label class="checkbox-label">
+            {{ form.consent(class="form-checkbox") }}
+            <span>
+              <strong>Ethical Research Consent:</strong> I confirm this submission uses synthetic or fully de-identified data and understand that MedNova AI provides research-grade generative summaries rather than validated medical diagnoses.
+            </span>
+          </label>
+          {% for error in form.consent.errors %}
+            <div class="invalid-feedback d-block">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="form-actions mt-4">
+          {{ form.submit(class="btn btn-primary btn-lg", id="submitBtn") }}
+          <a href="{{ url_for('main.dashboard') }}" class="btn btn-ghost">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-box">
+    <div class="spinner"></div>
+    <h3 class="loading-title">Synthesizing Clinical Differential...</h3>
+    <p class="loading-sub">Cross-referencing rare disease registry and evaluating via Gemini AI. Please wait.</p>
+  </div>
+</div>
+{% endblock %}

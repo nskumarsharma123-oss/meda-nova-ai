@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}500 Internal Server Error | MedNova AI{% endblock %}
+
+{% block content %}
+<div class="error-page">
+  <div class="error-card">
+    <div class="error-code">500</div>
+    <h1 class="error-title">Internal System Error</h1>
+    <p class="error-desc">An unexpected error occurred during medical synthesis or database processing. Internal system paths and stack traces are suppressed for clinical privacy and security.</p>
+    <div class="error-actions">
+      <a href="{{ url_for('main.index') }}" class="btn btn-primary">&larr; Return to Safety Portal</a>
+      <a href="{{ url_for('analysis.index') }}" class="btn btn-outline">Try Analysis Again</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

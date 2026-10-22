@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}400 Bad Request | MedNova AI{% endblock %}
+
+{% block content %}
+<div class="error-page">
+  <div class="error-card">
+    <div class="error-code">400</div>
+    <h1 class="error-title">Bad Request</h1>
+    <p class="error-desc">The server could not understand or validate your request. This often occurs when a CSRF token has expired or input data is malformed.</p>
+    <div class="error-actions">
+      <a href="{{ url_for('main.index') }}" class="btn btn-primary">&larr; Return to Homepage</a>
+      <a href="{{ url_for('analysis.index') }}" class="btn btn-outline">Start New Analysis</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

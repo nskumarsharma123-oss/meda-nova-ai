@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Rare Disease Knowledge Base | MedNova AI{% endblock %}
+
+{% block content %}
+<div class="page-header flex-between">
+  <div>
+    <h1 class="page-title">Rare Disease Knowledge Base</h1>
+    <p class="page-sub">Curated genetic, metabolic, and connective tissue disorder profiles verified against medical registries</p>
+  </div>
+</div>
+
+<!-- Search Bar -->
+<div class="card mb-4">
+  <div class="card-body">
+    <form method="GET" action="{{ url_for('main.knowledge_base') }}" class="search-form">
+      <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Search by disease name, disorder category, or symptom keyword (e.g. hypermobility, copper, enzyme)...">
+      <button type="submit" class="btn btn-primary">Search Registry</button>
+      {% if query %}
+        <a href="{{ url_for('main.knowledge_base') }}" class="btn btn-ghost">Clear</a>
+      {% endif %}
+    </form>
+  </div>
+</div>
+
+<!-- Disease Grid -->
+<div class="grid-2">
+  {% if diseases %}
+    {% for d in diseases %}
+      <div class="card disease-card">
+        <div class="card-body">
+          <div class="flex-between">
+            <h3 class="disease-title">{{ d.name }}</h3>
+            <span class="badge badge-info">{{ d.category }}</span>
+          </div>
+          <p class="disease-inheritance text-sm text-muted mt-1">
+            <strong>Inheritance:</strong> {{ d.inheritance }}
+          </p>
+          <p class="disease-desc mt-2">{{ d.description }}</p>
+
+          <div class="mt-3">
+            <span class="tag-label">Typical Clinical Symptoms:</span>
+            <div class="tag-cloud mt-1">
+              {% for sym in d.typical_symptoms %}
+                <span class="tag">{{ sym }}</span>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="card-actions flex-between mt-4">
+            <a href="{{ url_for('main.knowledge_base_detail', disease_id=d.id) }}" class="btn btn-sm btn-primary">
+              Full Disease Profile &rarr;
+            </a>
+            {% if d.source_url %}
+              <a href="{{ d.source_url }}" target="_blank" rel="noopener noreferrer" class="btn-text text-muted text-sm">
+                {{ d.source_name }} &nearr;
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="col-span-2 empty-state">
+      <p class="empty-title">No rare diseases match your query "{{ query }}".</p>
+      <a href="{{ url_for('main.knowledge_base') }}" class="btn btn-primary btn-sm">Show All Diseases</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}MedNova AI - AI-Assisted Early Identification of Rare Diseases{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+  <div class="hero-content">
+    <div class="hero-pill">Clinical Decision-Support Research</div>
+    <h1 class="hero-title">
+      AI-Assisted Early Identification of <span class="gradient-text">Rare Diseases</span>
+    </h1>
+    <p class="hero-description">
+      An educational and translational research prototype that structures patient-reported symptoms,
+      compares complex clinical presentations against curated medical registries, and synthesizes discussion points
+      for specialist evaluation using generative AI.
+    </p>
+    <div class="hero-actions">
+      <a href="{{ url_for('analysis.index') }}" class="btn btn-primary btn-lg">Start Patient Analysis &rarr;</a>
+      <a href="{{ url_for('main.knowledge_base') }}" class="btn btn-outline btn-lg">Browse Rare Diseases ({{ disease_count }})</a>
+      <a href="{{ url_for('main.dashboard') }}" class="btn btn-ghost btn-lg">Dashboard</a>
+    </div>
+  </div>
+</section>
+
+<!-- Core Prototype Modules Grid -->
+<section class="features-section">
+  <div class="section-header">
+    <h2 class="section-title">Core Research Modules</h2>
+    <p class="section-sub">Engineered with strict clinical boundaries and privacy safeguards</p>
+  </div>
+
+  <div class="grid-3">
+    <div class="card feature-card">
+      <div class="card-icon icon-ai">&#x2695;</div>
+      <h3 class="card-title">AI-Assisted Triangulation</h3>
+      <p class="card-text">
+        Transforms unstructured patient histories into normalized clinical profiles with bounded generative evaluation powered by Google Gemini.
+      </p>
+      <a href="{{ url_for('analysis.index') }}" class="card-link">Launch Analysis &rarr;</a>
+    </div>
+
+    <div class="card feature-card">
+      <div class="card-icon icon-kb">&#x1F4D6;</div>
+      <h3 class="card-title">Curated Knowledge Base</h3>
+      <p class="card-text">
+        Pre-indexed database of rare genetic, metabolic, and connective tissue disorders verified via Orphanet, NORD, and NIH GARD.
+      </p>
+      <a href="{{ url_for('main.knowledge_base') }}" class="card-link">Explore {{ disease_count }} Conditions &rarr;</a>
+    </div>
+
+    <div class="card feature-card">
+      <div class="card-icon icon-vault">&#x1F4DC;</div>
+      <h3 class="card-title">Private Document Vault</h3>
+      <p class="card-text">
+        Upload and inspect clinical laboratory reports and notes (PDF/TXT) stored in an isolated, private server directory.
+      </p>
+      <a href="{{ url_for('reports.upload') }}" class="card-link">Upload Documents &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- Clinical Safety Banner -->
+<section class="safety-card">
+  <div class="safety-card-content">
+    <h3 class="safety-title">&#x26A0;&#xFE0F; Medical Research & Safety Declarations</h3>
+    <ul class="safety-list">
+      <li><strong>Non-Diagnostic:</strong> MedNova AI does NOT issue definitive medical diagnoses or confirm disease presence.</li>
+      <li><strong>No Treatment Advice:</strong> The application will never recommend initiating, pausing, or altering medications.</li>
+      <li><strong>Synthetic Data:</strong> For demonstration and evaluation, users must submit only de-identified or synthetic patient profiles.</li>
+      <li><strong>Clinician In The Loop:</strong> Rare disease differential analysis is an aid for licensed clinical geneticists and specialists.</li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

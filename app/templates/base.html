@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}MedNova AI | Rare Disease Clinical Research Prototype{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <!-- Global Prototype Safety Warning Banner -->
+  <aside class="safety-banner" role="alert">
+    <div class="container banner-inner">
+      <span class="warning-badge">RESEARCH PROTOTYPE</span>
+      <p class="banner-text">
+        <strong>Not a medical device.</strong> For clinical research and educational purposes only. Do not use for diagnostic decisions or treatment changes.
+      </p>
+    </div>
+  </aside>
+
+  <!-- Navigation Bar -->
+  <header class="app-header">
+    <div class="container header-inner">
+      <a href="{{ url_for('main.index') }}" class="brand-logo">
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        <span class="brand-text">MedNova <span class="brand-accent">AI</span></span>
+      </a>
+
+      <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="{{ url_for('main.dashboard') }}" class="nav-link {% if request.endpoint == 'main.dashboard' %}active{% endif %}">Dashboard</a>
+        <a href="{{ url_for('analysis.index') }}" class="nav-link {% if 'analysis' in request.endpoint %}active{% endif %}">Symptom Analysis</a>
+        <a href="{{ url_for('reports.upload') }}" class="nav-link {% if 'reports' in request.endpoint %}active{% endif %}">Upload Reports</a>
+        <a href="{{ url_for('main.knowledge_base') }}" class="nav-link {% if 'knowledge_base' in request.endpoint %}active{% endif %}">Rare Diseases KB</a>
+        <a href="{{ url_for('history.list_history') }}" class="nav-link {% if 'history' in request.endpoint %}active{% endif %}">History</a>
+        <a href="{{ url_for('main.about') }}" class="nav-link {% if request.endpoint == 'main.about' %}active{% endif %}">About & Safety</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main class="main-body">
+    <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-messages">
+            {% for category, msg in messages %}
+              <div class="alert alert-{{ category }}" role="alert">
+                <span>{{ msg }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <p class="footer-title">MedNova AI &mdash; Early Identification of Rare Diseases</p>
+        <p class="footer-sub">Synthetic Clinical Decision Support & Generative Medical Informatics Prototype</p>
+      </div>
+      <div class="footer-right">
+        <p class="footer-copy">&copy; MedNova AI Project. Educational and Academic Research Use Only.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

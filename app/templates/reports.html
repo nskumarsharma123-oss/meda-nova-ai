@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Clinical Reports Vault | MedNova AI{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Clinical Reports Vault</h1>
+    <p class="page-sub">Secure document upload and ingestion for synthetic laboratory reports and clinical notes</p>
+  </div>
+</div>
+
+<div class="grid-2">
+  <!-- Upload Form Column -->
+  <div>
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-header-title">Upload Clinical Document</h2>
+      </div>
+      <div class="card-body">
+        <form method="POST" enctype="multipart/form-data" novalidate>
+          {{ form.hidden_tag() }}
+
+          <div class="form-group">
+            {{ form.report_file.label(class="form-label") }}
+            {{ form.report_file(class="form-control-file" + (" is-invalid" if form.report_file.errors else "")) }}
+            <small class="form-hint">Accepted formats: <strong>.pdf</strong>, <strong>.txt</strong> (Max size: 10 MB)</small>
+            {% for error in form.report_file.errors %}
+              <div class="invalid-feedback d-block">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="form-group">
+            {{ form.clinical_notes.label(class="form-label") }}
+            {{ form.clinical_notes(class="form-textarea" + (" is-invalid" if form.clinical_notes.errors else ""), rows=3, placeholder="e.g. Synthetic CBC and metabolic panel from research cohort...") }}
+            {% for error in form.clinical_notes.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="form-consent-box">
+            <label class="checkbox-label">
+              {{ form.consent(class="form-checkbox") }}
+              <span>
+                <strong>De-identification Confirmation:</strong> I verify that this file contains only synthetic or de-identified educational research data.
+              </span>
+            </label>
+            {% for error in form.consent.errors %}
+              <div class="invalid-feedback d-block">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="mt-4">
+            {{ form.submit(class="btn btn-primary btn-block") }}
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Security & Privacy Architecture Note -->
+    <div class="card info-box mt-4">
+      <h3 class="info-title">&#x1F512; Vault Security Architecture</h3>
+      <ul class="info-list">
+        <li><strong>Isolated Private Storage:</strong> Uploads are kept outside the public static directory.</li>
+        <li><strong>Cryptographic Renaming:</strong> Files receive random UUID filenames to prevent path traversal and collisions.</li>
+        <li><strong>MIME & Extension Enforcement:</strong> Only validated PDF and plain text documents are permitted.</li>
+        <li><strong>No Imaging Diagnostic Claims:</strong> MedNova AI does not interpret raw DICOM, MRI, or CT scans.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Uploaded Reports List Column -->
+  <div>
+    <div class="card">
+      <div class="card-header flex-between">
+        <h2 class="card-header-title">Ingested Documents (This Session)</h2>
+        <span class="badge badge-secondary">{{ reports|length }} Files</span>
+      </div>
+      <div class="card-body">
+        {% if reports %}
+          <div class="reports-list">
+            {% for report in reports %}
+              <div class="report-card">
+                <div class="flex-between">
+                  <div class="report-meta">
+                    <span class="report-ext">{{ report.file_type|upper }}</span>
+                    <div>
+                      <h4 class="report-filename">{{ report.original_filename }}</h4>
+                      <p class="report-sub">
+                        {{ (report.file_size / 1024)|round(1) }} KB &bull; Uploaded {{ report.uploaded_at.strftime('%Y-%m-%d %H:%M') if report.uploaded_at else 'Recent' }}
+                      </p>
+                    </div>
+                  </div>
+                  <!-- Delete form with CSRF -->
+                  <form method="POST" action="{{ url_for('reports.delete_report', report_id=report.id) }}" onsubmit="return confirm('Permanently remove this document?');">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-sm btn-danger">&#x1F5D1; Delete</button>
+                  </form>
+                </div>
+
+                {% if report.extracted_notes %}
+                  <div class="report-notes-preview mt-2">
+                    <div class="preview-label">Document Notes / Extracted Content:</div>
+                    <pre class="preview-content">{{ report.extracted_notes }}</pre>
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="empty-state">
+            <p class="empty-title">No documents in vault yet.</p>
+            <p class="empty-sub">Upload synthetic laboratory tests or clinical notes to support your symptom evaluations.</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

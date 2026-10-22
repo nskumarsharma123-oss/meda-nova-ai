@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Session Analysis History | MedNova AI{% endblock %}
+
+{% block content %}
+<div class="page-header flex-between">
+  <div>
+    <h1 class="page-title">Session Analysis History</h1>
+    <p class="page-sub">Review patient evaluations and uploaded clinical documents for your current active session</p>
+  </div>
+  {% if cases or reports %}
+    <div>
+      <form method="POST" action="{{ url_for('history.clear_history') }}" onsubmit="return confirm('Are you sure you want to permanently clear all session records and files?');">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="btn btn-danger">&#x1F5D1; Clear Entire Session History</button>
+      </form>
+    </div>
+  {% endif %}
+</div>
+
+<!-- Privacy & Session Notice -->
+<div class="alert alert-info mb-4">
+  <strong>Session Isolation Notice:</strong> In this local research prototype, history is isolated to your current browser session identifier via SQLite. No data is shared across sessions or uploaded to third-party tracking services.
+</div>
+
+<div class="grid-2">
+  <!-- Left: Cases -->
+  <div>
+    <div class="card">
+      <div class="card-header flex-between">
+        <h2 class="card-header-title">Analyzed Patient Cases ({{ cases|length }})</h2>
+        <a href="{{ url_for('analysis.index') }}" class="btn-text">+ New Case &rarr;</a>
+      </div>
+      <div class="card-body">
+        {% if cases %}
+          <div class="history-cases-list">
+            {% for c in cases %}
+              <div class="history-item">
+                <div class="flex-between">
+                  <div>
+                    <h3 class="history-title">Case #{{ c.id }} &bull; {{ c.age }} y/o {{ c.gender|capitalize }}</h3>
+                    <p class="history-meta">Duration: {{ c.duration }} &bull; {{ c.created_at.strftime('%Y-%m-%d %H:%M') if c.created_at else 'Recent' }}</p>
+                  </div>
+                  <a href="{{ url_for('analysis.view_case', case_id=c.id) }}" class="btn btn-sm btn-outline">View Findings &rarr;</a>
+                </div>
+                <div class="history-symptoms mt-2">
+                  <strong>Symptoms:</strong> {{ c.symptoms[:180] }}{% if c.symptoms|length > 180 %}...{% endif %}
+                </div>
+                {% if c.ai_summary %}
+                  <div class="history-summary mt-2">
+                    <strong>AI Differential Summary:</strong> {{ c.ai_summary[:200] }}{% if c.ai_summary|length > 200 %}...{% endif %}
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="empty-state">
+            <p class="empty-title">No patient cases analyzed yet.</p>
+            <a href="{{ url_for('analysis.index') }}" class="btn btn-primary btn-sm">Start an Analysis</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Reports -->
+  <div>
+    <div class="card">
+      <div class="card-header flex-between">
+        <h2 class="card-header-title">Ingested Clinical Documents ({{ reports|length }})</h2>
+        <a href="{{ url_for('reports.upload') }}" class="btn-text">+ Upload Report &rarr;</a>
+      </div>
+      <div class="card-body">
+        {% if reports %}
+          <div class="history-reports-list">
+            {% for r in reports %}
+              <div class="history-item">
+                <div class="flex-between">
+                  <div>
+                    <h4 class="history-title">{{ r.original_filename }}</h4>
+                    <p class="history-meta">{{ (r.file_size / 1024)|round(1) }} KB &bull; {{ r.file_type|upper }}</p>
+                  </div>
+                  <form method="POST" action="{{ url_for('reports.delete_report', report_id=r.id) }}" onsubmit="return confirm('Delete document?');">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-sm btn-ghost text-danger">&#x1F5D1;</button>
+                  </form>
+                </div>
+                {% if r.extracted_notes %}
+                  <p class="text-sm text-muted mt-2">{{ r.extracted_notes[:140] }}...</p>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="empty-state">
+            <p class="empty-title">No uploaded clinical documents.</p>
+            <a href="{{ url_for('reports.upload') }}" class="btn btn-outline btn-sm">Upload Clinical Files</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{
+    "python.terminal.useEnvFile": true,
+    "python.defaultInterpreterPath": "/Users/namansharma/Desktop/meda nova ai/venv/bin/python",
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "code-runner.runInTerminal": true,
+    "code-runner.executorMap": {
+        "python": "/Users/namansharma/Desktop/meda nova ai/venv/bin/python -u"
+    }
+}

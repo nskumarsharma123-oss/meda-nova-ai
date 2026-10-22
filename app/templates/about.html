@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}About & Clinical Ethics | MedNova AI{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">About MedNova AI</h1>
+    <p class="page-sub">Translational Medical Informatics & Rare Disease Differential Prototype</p>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">
+    <h2 class="card-header-title">Project Mission & Educational Objectives</h2>
+  </div>
+  <div class="card-body">
+    <p class="lead-text">
+      <strong>Full Project Title:</strong> <em>AI-Assisted Early Identification of Rare Diseases Using Generative Medical Data and Clinical Information.</em>
+    </p>
+    <p class="body-text mt-3">
+      Rare diseases affect hundreds of millions of people worldwide, yet patients often endure a "diagnostic odyssey" lasting several years and involving multiple misdiagnoses. MedNova AI investigates how generative artificial intelligence, combined with verified medical ontology and knowledge registries, can assist healthcare professionals and researchers in surfacing rare, atypical conditions earlier during differential evaluation.
+    </p>
+  </div>
+</div>
+
+<div class="grid-2">
+  <div class="card mb-4 border-warning">
+    <div class="card-header bg-warning-light">
+      <h3 class="card-header-title text-warning-dark">&#x26A0;&#xFE0F; Clinical Safety & Ethics Declarations</h3>
+    </div>
+    <div class="card-body">
+      <ul class="ethics-list">
+        <li><strong>Prototype Status:</strong> This is an academic research and educational prototype, NOT a clinically validated in-vitro diagnostic or Software as a Medical Device (SaMD).</li>
+        <li><strong>No Definitive Diagnosis:</strong> The model never claims that a disease has been confirmed or excluded.</li>
+        <li><strong>Distinction of Data Layers:</strong> User-reported observations, AI-generated possibilities, and verified medical registry entries are visually and architecturally segregated.</li>
+        <li><strong>No Pharmacotherapy Directives:</strong> The system strictly refrains from recommending initiating, adjusting, or discontinuing medications.</li>
+        <li><strong>Synthetic Data Standard:</strong> Users must rely on synthetic, anonymized, or public educational case vignettes.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <h3 class="card-header-title">&#x1F6E1;&#xFE0F; Security & Privacy Safeguards</h3>
+    </div>
+    <div class="card-body">
+      <ul class="security-list">
+        <li><strong>CSRF Protection:</strong> All state-changing requests use cryptographic CSRF tokens (Flask-WTF).</li>
+        <li><strong>Private Document Vault:</strong> Uploaded medical documents are stored in private server directories outside public static paths, assigned cryptographic random filenames.</li>
+        <li><strong>Session-Bound Isolation:</strong> Local SQLite records are bound to transient session identifiers, preventing cross-user visibility.</li>
+        <li><strong>No Third-Party Analytics:</strong> No user data or medical text is sold, logged to public telemetry, or indexed.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-header-title">Technical Stack & Architecture</h3>
+  </div>
+  <div class="card-body">
+    <div class="tech-grid">
+      <div class="tech-item">
+        <strong>Backend Framework</strong>
+        <span>Python 3.15 / Flask 3.1</span>
+      </div>
+      <div class="tech-item">
+        <strong>Generative AI SDK</strong>
+        <span>Google GenAI SDK (google-genai)</span>
+      </div>
+      <div class="tech-item">
+        <strong>ORM & Database</strong>
+        <span>Flask-SQLAlchemy / SQLite</span>
+      </div>
+      <div class="tech-item">
+        <strong>Security & Forms</strong>
+        <span>Flask-WTF / CSRFProtect</span>
+      </div>
+      <div class="tech-item">
+        <strong>Testing Suite</strong>
+        <span>Pytest 9.x</span>
+      </div>
+      <div class="tech-item">
+        <strong>Frontend</strong>
+        <span>Semantic HTML5, CSS3, Vanilla JS</span>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

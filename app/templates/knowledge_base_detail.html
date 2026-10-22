@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}{{ disease.name }} | Rare Disease Registry | MedNova AI{% endblock %}
+
+{% block content %}
+<div class="page-header flex-between">
+  <div>
+    <div class="breadcrumb">
+      <a href="{{ url_for('main.knowledge_base') }}">Rare Diseases KB</a> &rsaquo;
+      <span>{{ disease.name }}</span>
+    </div>
+    <h1 class="page-title">{{ disease.name }}</h1>
+    <p class="page-sub">{{ disease.category }} &bull; Inheritance: {{ disease.inheritance }}</p>
+  </div>
+  <div>
+    <a href="{{ url_for('analysis.index') }}" class="btn btn-primary">+ Evaluate Patient Case</a>
+  </div>
+</div>
+
+<div class="grid-2">
+  <div class="card mb-4">
+    <div class="card-header">
+      <h2 class="card-header-title">Clinical Overview</h2>
+    </div>
+    <div class="card-body">
+      <p class="lead-text">{{ disease.description }}</p>
+
+      <h3 class="section-subtitle mt-4">Diagnostic Considerations</h3>
+      <p class="body-text">{{ disease.diagnostic_considerations }}</p>
+
+      <div class="mt-4 pt-3 border-top">
+        <h4 class="text-sm font-semibold">Verified External Reference</h4>
+        <p class="text-sm text-muted">
+          Source: <strong>{{ disease.source_name }}</strong><br>
+          {% if disease.source_url %}
+            URL: <a href="{{ disease.source_url }}" target="_blank" rel="noopener noreferrer" class="link-external">{{ disease.source_url }} &nearr;</a>
+          {% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <h2 class="card-header-title">Characteristic Symptom Profile</h2>
+    </div>
+    <div class="card-body">
+      <p class="text-sm text-muted mb-3">
+        Patients evaluated against this condition in research literature frequently present with:
+      </p>
+      <ul class="symptoms-bullet-list">
+        {% for sym in disease.typical_symptoms %}
+          <li><strong>{{ sym }}</strong></li>
+        {% endfor %}
+      </ul>
+
+      <div class="info-box mt-4">
+        <h4 class="info-title">&#x26A0;&#xFE0F; Specialist Consultation Note</h4>
+        <p class="info-text">
+          Presentation of rare diseases can be highly heterogeneous with atypical or incomplete phenotypes. Molecular genetic confirmation and specialized biochemical assays are required for definitive diagnosis.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

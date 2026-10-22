@@ -1,0 +1,54 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run MedNova AI (app.py)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/app.py",
+            "python": "${workspaceFolder}/venv/bin/python",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Run MedNova AI (Flask Module)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "flask",
+            "python": "${workspaceFolder}/venv/bin/python",
+            "args": [
+                "run",
+                "--host=127.0.0.1",
+                "--port=5000",
+                "--debug"
+            ],
+            "env": {
+                "FLASK_APP": "app.py",
+                "FLASK_ENV": "development"
+            },
+            "envFile": "${workspaceFolder}/.env",
+            "console": "integratedTerminal",
+            "jinja": true
+        },
+        {
+            "name": "Run Pytest Suite",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "python": "${workspaceFolder}/venv/bin/python",
+            "args": [
+                "-v",
+                "tests"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Open Browser (MedNova AI)",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://127.0.0.1:5000",
+            "webRoot": "${workspaceFolder}/app"
+        }
+    ]
+}

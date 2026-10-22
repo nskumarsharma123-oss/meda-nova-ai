@@ -1,0 +1,137 @@
+[
+  {
+    "id": "ehlers-danlos",
+    "name": "Ehlers-Danlos Syndromes (EDS)",
+    "category": "Connective Tissue Disorder",
+    "inheritance": "Autosomal dominant or recessive depending on subtype",
+    "typical_symptoms": [
+      "joint hypermobility",
+      "skin hyperextensibility",
+      "tissue fragility",
+      "chronic joint pain",
+      "easy bruising",
+      "delayed wound healing"
+    ],
+    "description": "A group of hereditary connective tissue disorders characterized by joint hypermobility, skin hyperextensibility, and generalized tissue fragility caused by defects in collagen synthesis or structure.",
+    "diagnostic_considerations": "Beighton score evaluation, clinical subtype differentiation, targeted next-generation genetic sequencing panels.",
+    "source_name": "MedlinePlus Genetics / Orphanet (ORPHA:98249)",
+    "source_url": "https://medlineplus.gov/genetics/condition/ehlers-danlos-syndrome/",
+    "is_verified": true
+  },
+  {
+    "id": "fabry-disease",
+    "name": "Fabry Disease",
+    "category": "Lysosomal Storage Disorder",
+    "inheritance": "X-linked",
+    "typical_symptoms": [
+      "acroparesthesia",
+      "burning neuropathic pain in hands and feet",
+      "angiokeratomas",
+      "hypohidrosis",
+      "cornea verticillata",
+      "proteinuria",
+      "unexplained left ventricular hypertrophy"
+    ],
+    "description": "An X-linked lysosomal storage disorder caused by deficient alpha-galactosidase A (GLA) activity, leading to globotriaosylceramide (Gb3) accumulation in vascular endothelium and tissues.",
+    "diagnostic_considerations": "Alpha-galactosidase A enzyme activity assay in males, GLA gene sequence analysis in males and females, urinary or plasma lyso-Gb3 biomarker.",
+    "source_name": "NORD (National Organization for Rare Disorders)",
+    "source_url": "https://rarediseases.org/rare-diseases/fabry-disease/",
+    "is_verified": true
+  },
+  {
+    "id": "wilson-disease",
+    "name": "Wilson Disease",
+    "category": "Metabolic Disorder / Copper Metabolism",
+    "inheritance": "Autosomal recessive",
+    "typical_symptoms": [
+      "kayser-fleischer rings",
+      "unexplained hepatitis or cirrhosis",
+      "tremor",
+      "dystonia",
+      "dysarthria",
+      "psychiatric changes",
+      "coombs-negative hemolytic anemia"
+    ],
+    "description": "An autosomal recessive error of copper metabolism due to mutations in the ATP7B gene, leading to excessive copper deposition primarily in the liver, brain, and corneas.",
+    "diagnostic_considerations": "Slit-lamp examination for Kayser-Fleischer rings, serum ceruloplasmin, 24-hour urinary copper excretion, liver biopsy for quantitative copper, ATP7B genetic testing.",
+    "source_name": "NIH GARD / Orphanet (ORPHA:905)",
+    "source_url": "https://rarediseases.info.nih.gov/diseases/7893/wilson-disease",
+    "is_verified": true
+  },
+  {
+    "id": "marfan-syndrome",
+    "name": "Marfan Syndrome",
+    "category": "Connective Tissue Disorder",
+    "inheritance": "Autosomal dominant",
+    "typical_symptoms": [
+      "tall slender build",
+      "disproportionately long limbs and fingers (arachnodactyly)",
+      "pectus excavatum or carinatum",
+      "aortic root dilation or dissection",
+      "ectopia lentis",
+      "dural ectasia"
+    ],
+    "description": "An autosomal dominant systemic disorder of connective tissue caused by pathogenic variants in the FBN1 gene encoding fibrillin-1, predominantly affecting cardiovascular, ocular, and skeletal systems.",
+    "diagnostic_considerations": "Revised Ghent Criteria, echocardiography of aortic root and ascending aorta, slit-lamp ophthalmologic exam, FBN1 sequencing.",
+    "source_name": "NORD / The Marfan Foundation",
+    "source_url": "https://rarediseases.org/rare-diseases/marfan-syndrome/",
+    "is_verified": true
+  },
+  {
+    "id": "gaucher-disease",
+    "name": "Gaucher Disease",
+    "category": "Lysosomal Storage Disorder",
+    "inheritance": "Autosomal recessive",
+    "typical_symptoms": [
+      "splenomegaly",
+      "hepatomegaly",
+      "thrombocytopenia",
+      "anemia",
+      "bone pain",
+      "bone crises",
+      "osteopenia",
+      "fatigue"
+    ],
+    "description": "A hereditary metabolic condition caused by a deficiency of the lysosomal enzyme beta-glucocerebrosidase (GBA gene), causing lipid-laden macrophages (Gaucher cells) to accumulate in the spleen, liver, and bone marrow.",
+    "diagnostic_considerations": "Beta-glucosidase enzyme activity assay in peripheral blood leukocytes, GBA targeted mutation or sequencing, bone imaging (DEXA, MRI).",
+    "source_name": "MedlinePlus Genetics / Orphanet (ORPHA:355)",
+    "source_url": "https://medlineplus.gov/genetics/condition/gaucher-disease/",
+    "is_verified": true
+  },
+  {
+    "id": "alkaptonuria",
+    "name": "Alkaptonuria",
+    "category": "Inborn Error of Metabolism",
+    "inheritance": "Autosomal recessive",
+    "typical_symptoms": [
+      "dark urine on exposure to air",
+      "ochronosis (dark pigmentation of cartilage and sclera)",
+      "early-onset severe degenerative arthritis",
+      "aortic valve stenosis",
+      "kidney stones"
+    ],
+    "description": "A rare autosomal recessive metabolic disorder caused by deficiency of homogentisate 1,2-dioxygenase (HGD gene), causing homogentisic acid accumulation in collagenous tissues and urine.",
+    "diagnostic_considerations": "Urinary organic acid analysis by GC-MS detecting elevated homogentisic acid, clinical observation of urine darkening with alkalinization, HGD gene analysis.",
+    "source_name": "NIH GARD / Orphanet (ORPHA:56)",
+    "source_url": "https://rarediseases.info.nih.gov/diseases/5775/alkaptonuria",
+    "is_verified": true
+  },
+  {
+    "id": "pompe-disease",
+    "name": "Pompe Disease (Glycogen Storage Disease Type II)",
+    "category": "Metabolic / Glycogen Storage Disease",
+    "inheritance": "Autosomal recessive",
+    "typical_symptoms": [
+      "progressive proximal muscle weakness",
+      "respiratory insufficiency",
+      "hypertrophic cardiomyopathy (infantile-onset)",
+      "elevated serum creatine kinase",
+      "exercise intolerance"
+    ],
+    "description": "An autosomal recessive lysosomal storage disease resulting from deficiency of acid alpha-glucosidase (GAA), leading to lysosomal glycogen accumulation in skeletal and cardiac muscle.",
+    "diagnostic_considerations": "Acid alpha-glucosidase enzyme activity assay (DBS or leukocytes), GAA gene sequencing, electromyography, pulmonary function tests.",
+    "source_name": "NORD / MedlinePlus Genetics",
+    "source_url": "https://rarediseases.org/rare-diseases/pompe-disease/",
+    "is_verified": true
+  }
+]
